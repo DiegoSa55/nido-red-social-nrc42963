@@ -6,9 +6,9 @@
    Docente    : Carlos del Carpio
    Semestre   : 2026-20
    Compilador : Dev-C++ (MinGW / GCC, C++11 o superior)
-   NRC        :
-   Grupo      :
-   Integrantes:
+   NRC        : 42963
+   Grupo      : A
+   Integrantes: Fabricio - Airton - Diego
    ============================================================= */
 
 #include <iostream>
@@ -31,13 +31,19 @@ NodoUsuario *porId[MAX];
 int nUsuarios = 0;
 
 // ===== FICHA =====
-const string COMUNIDAD = "nido-de-prueba";
-const int N_U = 8;
-string fUsuario[N_U] = {"@mango", "@byte", "@pixel", "@andes", "@cuy", "@nova", "@zenit", "@lofi"};
-const int N_S = 10;
-string fSigue[N_S][2] = {{"@byte", "@mango"}, {"@pixel", "@mango"}, {"@mango", "@byte"}, {"@cuy", "@byte"},
-                         {"@andes", "@cuy"}, {"@nova", "@pixel"}, {"@zenit", "@nova"}, {"@mango", "@pixel"},
-                         {"@lofi", "@zenit"}, {"@zenit", "@lofi"}};
+const string COMUNIDAD = "nido-picaflor";
+const int N_U = 10;
+string fUsuario[N_U] = {"@mochila", "@puma", "@arena", "@radio", "@indie",
+                        "@dron", "@trueno", "@kiwi", "@zorro", "@salsa"};
+const int N_S = 16;
+string fSigue[N_S][2] = {{"@salsa", "@dron"}, {"@arena", "@mochila"},
+                         {"@arena", "@trueno"}, {"@zorro", "@dron"},
+                         {"@dron", "@zorro"}, {"@arena", "@puma"},
+                         {"@puma", "@mochila"}, {"@indie", "@puma"},
+                         {"@salsa", "@mochila"}, {"@indie", "@radio"},
+                         {"@radio", "@puma"}, {"@kiwi", "@puma"},
+                         {"@dron", "@salsa"}, {"@arena", "@dron"},
+                         {"@salsa", "@puma"}, {"@indie", "@zorro"}};
 // =================
 
 NodoUsuario* crearUsuario(string usuario, int id) {
@@ -66,36 +72,68 @@ void imprimirMarcados(string titulo, bool marca[]) {
 /* ---------- Arbol binario de busqueda (todo recursivo) ---------- */
 
 NodoUsuario* buscar(NodoUsuario *r, string u) {
-    // TODO R1a
-    return nullptr;
+    // R1a
+    if (r == nullptr) return nullptr;
+    if (r->usuario == u) return r;
+    if (u < r->usuario) return buscar(r->izq, u);
+    return buscar(r->der, u);
 }
 
 bool insertar(NodoUsuario *&r, NodoUsuario *nuevo) {
-    // TODO R1b
-    return false;
+    // R1b
+    if (r == nullptr) {
+        r = nuevo;
+        return true;
+    }
+    if (nuevo->usuario == r->usuario) return false;
+    if (nuevo->usuario < r->usuario) return insertar(r->izq, nuevo);
+    return insertar(r->der, nuevo);
 }
 
 bool registrarUsuario(NodoUsuario *&raiz, string u) {
-    // TODO R1c
-    return false;
+    // R1c
+    if (!esUsuarioValido(u)) return false;
+    if (nUsuarios >= MAX) return false;
+    if (buscar(raiz, u) != nullptr) return false;
+
+    NodoUsuario *nuevo = crearUsuario(u, nUsuarios);
+    if (!insertar(raiz, nuevo)) {
+        delete nuevo;
+        return false;
+    }
+    porId[nUsuarios] = nuevo;
+    nUsuarios++;
+    return true;
 }
 
 void enorden(NodoUsuario *r) {
-    // TODO R2a
+    // R2a
+    if (r == nullptr) return;
+    enorden(r->izq);
+    cout << " " << r->usuario;
+    enorden(r->der);
 }
 
 void preorden(NodoUsuario *r) {
-    // TODO R2b
+    // R2b
+    if (r == nullptr) return;
+    cout << " " << r->usuario;
+    preorden(r->izq);
+    preorden(r->der);
 }
 
 int contar(NodoUsuario *r) {
-    // TODO R2c
-    return 0;
+    // R2c
+    if (r == nullptr) return 0;
+    return 1 + contar(r->izq) + contar(r->der);
 }
 
 int altura(NodoUsuario *r) {
-    // TODO R2d
-    return 0;
+    // R2d
+    if (r == nullptr) return 0;
+    int hi = altura(r->izq);
+    int hd = altura(r->der);
+    return 1 + (hi > hd ? hi : hd);
 }
 
 int hojas(NodoUsuario *r) {
@@ -204,7 +242,12 @@ int main() {
         cout << "> " << linea << endl;
 
         if (orden == "registrar") {
-            // TODO R1d
+            // R1d
+            if (!esUsuarioValido(a1)) cout << "E: Usuario invalido " << a1 << endl;
+            else if (nUsuarios >= MAX) cout << "E: Limite de " << MAX << " cuentas alcanzado" << endl;
+            else if (buscar(raiz, a1) != nullptr) cout << "E: Ya existe " << a1 << endl;
+            else if (registrarUsuario(raiz, a1))
+                cout << "Registrado: " << a1 << " (id " << (nUsuarios - 1) << ")" << endl;
         }
         else if (orden == "perfil") {
             NodoUsuario *u = buscar(raiz, a1);
