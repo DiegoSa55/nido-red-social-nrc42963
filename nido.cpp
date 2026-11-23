@@ -100,7 +100,12 @@ int altura(NodoUsuario *r) {
 
 int hojas(NodoUsuario *r) {
     // TODO R2e
+    if (r == nullptr)
     return 0;
+    if (r->izq == nullptr && r->der == nullptr)
+        return 1;
+
+    return hojas(r->izq) + hojas(r->der);
 }
 
 /* ---------- Grafo dirigido: matriz de adyacencia sigue ---------- */
@@ -113,7 +118,14 @@ int contarSiguiendo(int id) {
 
 int contarSeguidores(int id) {
     // TODO R3a
-    return 0;
+     int k = 0;
+
+    for (int x = 0; x < nUsuarios; x++) {
+        if (sigue[x][id] == 1)
+            k++;
+    }
+
+    return k;
 }
 
 void difundir(int v, bool visto[], bool imprimir) {
@@ -225,9 +237,38 @@ int main() {
         }
         else if (orden == "seguir") {
             // TODO R3b
+            NodoUsuario *a = buscar(raiz, a1);
+    NodoUsuario *b = buscar(raiz, a2);
+
+    if (a == nullptr || b == nullptr) {
+        cout << "E: Usuario no existe" << endl;
+    }
+    else if (a->id == b->id) {
+        cout << "E: No puede seguirse a si mismo" << endl;
+    }
+    else if (sigue[a->id][b->id] == 1) {
+        cout << "E: Ya sigue a " << b->usuario << endl;
+    }
+    else {
+        sigue[a->id][b->id] = 1;
+        cout << a->usuario << " ahora sigue a " << b->usuario << endl;
+    }
         }
         else if (orden == "dejar") {
             // TODO R3c
+            NodoUsuario *a = buscar(raiz, a1);
+    NodoUsuario *b = buscar(raiz, a2);
+
+    if (a == nullptr || b == nullptr) {
+        cout << "E: Usuario no existe" << endl;
+    }
+    else if (sigue[a->id][b->id] == 0) {
+        cout << "E: " << a->usuario << " no sigue a " << b->usuario << endl;
+    }
+    else {
+        sigue[a->id][b->id] = 0;
+        cout << a->usuario << " dejo de seguir a " << b->usuario << endl;
+    }
         }
         else if (orden == "siguiendo") {
             NodoUsuario *u = buscar(raiz, a1);
@@ -240,12 +281,61 @@ int main() {
         }
         else if (orden == "seguidores") {
             // TODO R3d
+            NodoUsuario *u = buscar(raiz, a1);
+
+    if (u == nullptr) {
+        cout << "E: No existe " << a1 << endl;
+    }
+    else {
+        bool marca[MAX] = {false};
+
+        for (int x = 0; x < nUsuarios; x++) {
+            if (sigue[x][u->id] == 1)
+                marca[x] = true;
+        }
+
+        imprimirMarcados("Seguidores de " + u->usuario, marca);
+    }
         }
         else if (orden == "mutuos") {
             // TODO R4a
+            NodoUsuario *u = buscar(raiz, a1);
+
+    if (u == nullptr) {
+        cout << "E: No existe " << a1 << endl;
+    }
+    else {
+        bool marca[MAX] = {false};
+
+        for (int x = 0; x < nUsuarios; x++) {
+            if (sigue[u->id][x] == 1 && sigue[x][u->id] == 1)
+                marca[x] = true;
+        }
+
+        imprimirMarcados("Mutuos de " + u->usuario, marca);
+    }
         }
         else if (orden == "popular") {
             // TODO R4b
+            if (nUsuarios == 0) {
+        cout << "Popular: (nadie)" << endl;
+    }
+    else {
+        int mejor = 0;
+        int maxSeguidores = contarSeguidores(0);
+
+        for (int x = 1; x < nUsuarios; x++) {
+            int seguidores = contarSeguidores(x);
+
+            if (seguidores > maxSeguidores) {
+                maxSeguidores = seguidores;
+                mejor = x;
+            }
+        }
+
+        cout << "Popular: " << porId[mejor]->usuario
+             << " (" << maxSeguidores << " seguidores)" << endl;
+    }
         }
         else if (orden == "alcance") {
             // TODO R5b
