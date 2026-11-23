@@ -30,7 +30,11 @@ Si un acuerdo cambia, se actualiza aqui **con fecha**. Nada de borrar: se tacha 
 - Crear Repositorio · Llenar el README.md · 19/11/2026 
 - Llenar los ACUERDOS.md y completar el capitulo 1 · Fabricio · 19/11/2026.
 
-### Acta 2 · fecha: ____
+### Acta 2 · fecha: 22/11/2026
 - Asistentes:
-- Temas:
+    Fabricio
+    Airton
+- Temas: Completar del R1 - R4
 - Acuerdos:
+Fabricio: Hara R1a, R1b, R1c, R1d, R2a, R2b, R2c y R2d
+Airton: Hara R2e, R3a, R3b, R3c, R3d, R4a y R4b
