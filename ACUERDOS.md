@@ -4,9 +4,10 @@ Si un acuerdo cambia, se actualiza aqui **con fecha**. Nada de borrar: se tacha 
 
 ## Roles y reparto
 
-| Integrante | Rol | Requisitos o tareas | Revisa los PR de |
-|---|---|---|---|
-|  |  |  |  |
+| Integrante | Rol | Requisitos o tareas |
+|Diego|Escritor de codigo.|Responsabilidad.|
+|Fabricio|Escritor de codigo.|Responsabilidad.|
+|Airton|Escritor de codigo.|Responsabilidad.|
 
 ## Como trabajamos
 
@@ -38,3 +39,4 @@ Si un acuerdo cambia, se actualiza aqui **con fecha**. Nada de borrar: se tacha 
 - Acuerdos:
 Fabricio: Hara R1a, R1b, R1c, R1d, R2a, R2b, R2c y R2d
 Airton: Hara R2e, R3a, R3b, R3c, R3d, R4a y R4b
+Diego: Hara
