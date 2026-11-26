@@ -51,3 +51,4 @@ Diego: Hara R5a, R5b, R5c, R6a, R6b, R6c, R7a, R7b.
 Fabricio: Subira IA.md, actualizar ACUERDOS.md, ayudar a completar el informe.
 Diego: Hara R5a, R5b, R5c, R6a, R6b, R6c, R7a, R7b.
 Airton: Ayudar a completar el informe.
+-
