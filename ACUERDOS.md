@@ -38,5 +38,16 @@ Si un acuerdo cambia, se actualiza aqui **con fecha**. Nada de borrar: se tacha 
 - Temas: Completar del R1 - R4
 - Acuerdos:
 Fabricio: Hara R1a, R1b, R1c, R1d, R2a, R2b, R2c y R2d
-Airton: Hara R2e, R3a, R3b, R3c, R3d, R4a y R4b
-Diego: Hara
+Airton: Hara R2e, R3a, R3b, R3c, R3d, R4a y R4b.
+Diego: Hara R5a, R5b, R5c, R6a, R6b, R6c, R7a, R7b.
+
+### Acta 3 · fecha: 25/11/2026
+- Asistentes:
+    Fabricio
+    Airton
+    Diego
+- Temas: Completar del R1 - R4
+- Acuerdos:
+Fabricio: Subira IA.md, actualizar ACUERDOS.md, ayudar a completar el informe.
+Diego: Hara R5a, R5b, R5c, R6a, R6b, R6c, R7a, R7b.
+Airton: Ayudar a completar el informe.
